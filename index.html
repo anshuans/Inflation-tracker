@@ -784,24 +784,9 @@ const { year, product, intent } = parseQuery(query);
   <div id="fridayBotResponse"></div>
 </div>
 <script> 
-fetch("https://api.api-ninjas.com/v1/inflation?country=India", {
-  method: "GET",
-  headers: {
-    "eLw+4HP6XlSBUPDLp9VRNg==fLCnqV1zkCbzvJ8Z "
-  }
-})
-.then(response => response.json())
-.then(data => {
-  console.log("Inflation Rate:", data.inflation_rate);
-  alert(`India's inflation rate in ${data.month} ${data.year} is ${data.inflation_rate}%`);
-})
-.catch(error => {
-  console.error("API error:", error);
-});
-
-       const fridayTopics = { "inflation rate": "current annual retail inflation rate in India, as measured by the Consumer Price Index (CPI), is 2.82% for May 2025, according to ETCFO.com. This is the lowest reading since February 2019. The inflation rate has been on a downward trend for the past three financial years, easing from 6.7% in 2022-23 to 5.4% in 2023-24, and further to 4.6% in 2024-25.",
-         "impact personal": "Inflation, a general increase in prices of goods and services, significantly impacts personal life by reducing purchasing power, increasing the cost of living, and affecting savings and investments. It can lead to decreased financial security, especially for those on fixed incomes or with limited savings.",
-    "define inflation": "Inflation refers to a general increase in the prices of goods and services in an economy over a period of time, which reduces the purchasing power of money. In simpler terms, it means you need more money to buy the same things you used to buy before, because the value of money has decreased.",
+ const fridayTopics = { "inflation rate": "current annual retail inflation rate in India, as measured by the Consumer Price Index (CPI), is 2.82% for May 2025, according to ETCFO.com. This is the lowest reading since February 2019. The inflation rate has been on a downward trend for the past three financial years, easing from 6.7% in 2022-23 to 5.4% in 2023-24, and further to 4.6% in 2024-25.",
+    "impact personal": "Inflation, a general increase in prices of goods and services, significantly impacts personal life by reducing purchasing power, increasing the cost of living, and affecting savings and investments. It can lead to decreased financial security, especially for those on fixed incomes or with limited savings.",
+                       "define inflation": "Inflation refers to a general increase in the prices of goods and services in an economy over a period of time, which reduces the purchasing power of money. In simpler terms, it means you need more money to buy the same things you used to buy before, because the value of money has decreased.",
     "what is inflation": "Inflation is the rate at which the general price level for goods and services rises, reducing purchasing power.",
     "impact on national development": "Inflation can both support growth through spending and hurt it by reducing purchasing power and savings.",
     "impact on personal development": "Personal financial health is directly impacted, influencing saving habits, consumption patterns, and even mental health.",
