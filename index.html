@@ -783,8 +783,25 @@ const { year, product, intent } = parseQuery(query);
   <button onclick="fridayBotSearch()">Ask Friday</button>
   <div id="fridayBotResponse"></div>
 </div>
-<script>
-  const fridayTopics = {
+<script><button onclick="checkInflation()">📈 Get Live Inflation</button>
+
+function checkInflation() {
+  fetch("https://api.api-ninjas.com/v1/inflation?country=India", {
+    method: "GET",
+    headers: {
+      "X-Api-Key": "REPLACE_WITH_YOUR_REAL_API_KEY"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(`📊 India's inflation rate in ${data.month} ${data.year} is ${data.inflation_rate}%`);
+  })
+  .catch(error => {
+    alert("❌ Error fetching inflation data.");
+    console.error(error);
+  });
+}
+ const fridayTopics = {
     "what is inflation": "Inflation is the rate at which the general price level for goods and services rises, reducing purchasing power.",
     "inflation trends over 10 years": "Over the last decade, inflation showed volatility with major spikes in 2020 and 2022 due to COVID and geopolitical tensions.",
     "inflation impact by category": "Food and transport expenses have seen the largest inflationary increases, especially post-2020.",
