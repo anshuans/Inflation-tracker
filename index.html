@@ -786,6 +786,74 @@ const { year, product, intent } = parseQuery(query);
   <div id="teInflationRate" style="margin: 20px 0; font-weight: bold; font-size: 18px; color: #2c3e50;">
   Fetching India's live inflation rate...
 </div>
+  <!-- NEW INFLATION IMPACT CALCULATOR SECTION -->
+
+<div class="section" style="margin-top: 40px;">
+  <h3>Inflation Impact Calculator</h3>
+  <p>Estimate how inflation affects your future expenses over time.</p>
+
+  <form id="inflationForm">
+    <label for="years">Calculate for (years): </label>
+    <select id="years">
+      <option value="1">1</option>
+      <option value="3">3</option>
+      <option value="5" selected>5</option>
+      <option value="10">10</option>
+    </select>
+    <br /><br />
+
+    <div id="expenseInputs" style="margin-top: 10px;">
+      <label>Enter your monthly expenses:</label><br />
+      
+      <input type="text" placeholder="Category (e.g. Food)" class="category" />
+      <input type="number" placeholder="Amount (₹)" class="amount" /><br /><br />
+
+      <input type="text" placeholder="Category (e.g. Rent)" class="category" />
+      <input type="number" placeholder="Amount (₹)" class="amount" /><br /><br />
+
+      <input type="text" placeholder="Category (e.g. Travel)" class="category" />
+      <input type="number" placeholder="Amount (₹)" class="amount" /><br /><br />
+    </div>
+
+    <button type="button" onclick="calculateInflationImpact()">Calculate Impact</button>
+  </form>
+
+  <div id="inflationResult" style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 4px solid #4caf50;"></div>
+</div>
+
+<script>
+  function calculateInflationImpact() {
+    const inflationRate = 5.65 / 100; // example inflation rate
+    const years = parseInt(document.getElementById("years").value);
+    const categories = document.querySelectorAll(".category");
+    const amounts = document.querySelectorAll(".amount");
+
+    let totalCurrent = 0;
+    let futureHTML = "<h4>Results:</h4><ul>";
+
+    for (let i = 0; i < categories.length; i++) {
+      const cat = categories[i].value;
+      const amt = parseFloat(amounts[i].value);
+
+      if (cat && !isNaN(amt)) {
+        totalCurrent += amt;
+        const futureAmt = (amt * Math.pow(1 + inflationRate, years)).toFixed(2);
+        futureHTML += `<li>${cat}: ₹${amt} → ₹${futureAmt}</li>`;
+      }
+    }
+
+    const futureTotal = (totalCurrent * Math.pow(1 + inflationRate, years)).toFixed(2);
+    const additionalCost = (futureTotal - totalCurrent).toFixed(2);
+    const powerLoss = ((additionalCost / totalCurrent) * 100).toFixed(2);
+
+    futureHTML += `</ul><p><strong>Future Cost:</strong> ₹${futureTotal}</p>`;
+    futureHTML += `<p><strong>Additional Cost:</strong> ₹${additionalCost}</p>`;
+    futureHTML += `<p><strong>Purchasing Power Loss:</strong> ${powerLoss}%</p>`;
+
+    document.getElementById("inflationResult").innerHTML = futureHTML;
+  }
+</script>
+<!-- End of New Calculator Section -->
 </div>
 </div>
 <script> 
